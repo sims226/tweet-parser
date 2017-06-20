@@ -1,12 +1,10 @@
-# NOTE: THIS APP IS PAUSED FOR A MINUTE WHILE I WORK ON LITTLER TWITTER APPS.
-
 # **Let Them Parse Tweets**
 A tiny web app that counts (and sorts) punctuation marks from your last 100 tweets.
 
 ## **Built With**
 <!-- + ![HTML5](https://en.wikipedia.org/wiki/Node.js#/media/File:Node.js_logo.svg) -->
 <!-- + ![CSS3](https://en.wikipedia.org/wiki/Node.js#/media/File:Node.js_logo.svg) -->
-![Node.js](https://en.wikipedia.org/wiki/Node.js#/media/File:Node.js_logo.svg)
+![Node.js](https://nodejs.org/static/images/logos/nodejs-green.png)
 
 <!-- ## **Background**
 As a literature student in my twenties, I discovered Richard Brautigan, a little known poet and novelist from the post-Beat Haight-Ashbury scene in the 1960s. The first of his novels I read was *A Confederate General from Big Sur*, which included this passage, from the chapter, *"The Rivets in Ecclesiastes"* :
