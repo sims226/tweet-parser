@@ -1,0 +1,26 @@
+{
+  "name": "tweet-parser",
+  "version": "1.0.0",
+  "description": "practice app to parse tweets",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sims226/tweet-parser.git"
+  },
+  "keywords": [
+    "twitter"
+  ],
+  "author": "Anthony Sims",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sims226/tweet-parser/issues"
+  },
+  "homepage": "https://github.com/sims226/tweet-parser#readme",
+  "dependencies": {
+    "dotenv": "^4.0.0",
+    "twitter": "^1.7.1"
+  }
+}
