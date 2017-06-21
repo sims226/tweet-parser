@@ -64,7 +64,6 @@ client.get('statuses/user_timeline', {screen_name: 'sims226', count: 100, trim_u
       }
     }
   });
-  console.log("\n");
   console.log("_______________________\n");
   console.log("YOUR PUNCTUATION COUNTS\r");
   console.log("_______________________\r");
@@ -77,7 +76,4 @@ client.get('statuses/user_timeline', {screen_name: 'sims226', count: 100, trim_u
   console.log("COLONS: " + colons);
   console.log("SEMICOLONS: " + semicolons);
   console.log("APOSTROPHES: " + apostrophes);
-
-
-
 });
