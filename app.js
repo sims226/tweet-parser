@@ -1,4 +1,4 @@
-// REQUIRED NODE MODULES
+// MODULE DEPENDENCIES
 var dotenv = require('dotenv');
 var Twitter = require('twitter');
 
