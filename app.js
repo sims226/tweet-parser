@@ -13,7 +13,15 @@ var client = new Twitter({
   access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
 });
 
-// GRAB LAST 100 TWEETS FROM USER TIMELINE AND DO STUFF TO THEM
+// CALL STACK
+
+// GRAB USER INPUT AND STORE IT
+function storeInput() {
+  var screenName = getElementById("userInput").value;
+  console.log(screenName);
+}
+
+// GRAB LAST 100 TWEETS
 client.get('statuses/user_timeline', {screen_name: 'sims226', count: 100, trim_user: true}, function(error, tweets, response) {
   if(error) throw error;
 
@@ -64,6 +72,8 @@ client.get('statuses/user_timeline', {screen_name: 'sims226', count: 100, trim_u
       }
     }
   });
+
+  // PRINT RESULTS TO THE CONSOLE
   console.log("_______________________\n");
   console.log("YOUR PUNCTUATION COUNTS\r");
   console.log("_______________________\r");
@@ -76,4 +86,14 @@ client.get('statuses/user_timeline', {screen_name: 'sims226', count: 100, trim_u
   console.log("COLONS: " + colons);
   console.log("SEMICOLONS: " + semicolons);
   console.log("APOSTROPHES: " + apostrophes);
+
+  // WRITE TO THE DOM
+  document.getElementById("#commas").innerHTML(commas);
+  document.getElementById("#periods").innerHTML(periods);
+  document.getElementById("#questions").innerHTML(questions);
+  document.getElementById("#exclamations").innerHTML(exclamations);
+  document.getElementById("#dashes").innerHTML(dashes);
+  document.getElementById("#colons").innerHTML(colons);
+  document.getElementById("#semicolons").innerHTML(semicolons);
+  document.getElementById("#apostrophes").innerHTML(apostrophes);
 });
