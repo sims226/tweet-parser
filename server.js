@@ -1,48 +1,108 @@
 // MODULE DEPENDENCIES
-var http = require("http");
-var fs = require("fs");
-var path = require("path");
-var mime = require("mime");
+var dotenv = require('dotenv');
+var Twitter = require('twitter');
+var express = require('express')
+var app = express() 
 
-function send404(response) {
-  response.writeHead(404, {"Content-type" : "text/plain"});
-  response.write("Error 404: resource not found");
-  response.end();
-}
+// LOAD ENV VARIABLES
+dotenv.load();
 
-function sendPage(response, filePath, fileContents) {
-  response.writeHead(200, {"Content-type" : mime.lookup(path.basename(filePath))});
-  response.end(fileContents);
-}
+// START A SERVER
+app.listen(3000, function () {
+  console.log('Listening on port 3000');
+})
 
-function serverWorking(response, absPath) {
-  fs.exists(absPath, function(exists) {
-    if (exists) {
-      fs.readFile(absPath, function(err, data) {
-        if (err) {
-          send404(response);
-        } else {
-          sendPage(response, absPath, data);
-        }
-      });
-    } else {
-      send404(response);
-    }
-  });
-}
+// ACCESS THE FRONT END FILES
+app.use(express.static('public'));
 
-var server = http.createServer(function(request, response) {
-  var filePath = false;
 
-  if (request.url == '/') {
-    filePath = "public/index.html";
-  } else {
-    filePath = "public" + request.url;
-  }
-
-  var absPath = "./" + filePath;
-  serverWorking(response, absPath);
+// MAKE A TWITTER CLIENT
+var client = new Twitter({
+  consumer_key: process.env.TWITTER_CONSUMER_KEY,
+  consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+  access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
+  access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
 });
 
-var port_number = server.listen(process.env.PORT || 3000);
-console.log("Server listening on port " + port_number + "...");
+// GRAB USER INPUT AND STORE IT
+function storeInput() {
+  var screenName = getElementById("userInput").value;
+  console.log(screenName);
+}
+
+// GRAB LAST 100 TWEETS
+client.get('statuses/user_timeline', {screen_name: 'sims226', count: 100, trim_user: true}, function(error, tweets, response) {
+  if(error) throw error;
+
+  // LOOP OVER RESPONSE OBJECT AND PUSH TWEET TEXT INTO NEW ARRAY
+  var tweetsArray = [];
+  for(var i = 0; i < tweets.length; i++) {
+    tweetsArray.push(tweets[i].text);
+    // console.log((i + 1) + ": " + tweetsArray[i] + "\n");
+  }
+
+  // COUNT ALL THE PUNCTUATION IN THE TWEETS AND COUNT THE RESULTS
+  var commas        = 0;
+  var periods       = 0;
+  var questions     = 0;
+  var exclamations  = 0;
+  var dashes        = 0;
+  var colons        = 0;
+  var semicolons    = 0;
+  var apostrophes   = 0;
+
+  tweetsArray.map( function(text) {
+    for (var i = 0; i < text.length; i++) {
+      switch (text[i]) {
+        case "."  :
+          periods++;
+          break;
+        case ","  :
+          commas++;
+          break;
+        case "?"  :
+          questions++;
+          break;
+        case "!"  :
+          exclamations++;
+          break;
+        case "-"  :
+          dashes++;
+          break;
+        case ":"  :
+          colons++;
+          break;
+        case ";"  :
+          semicolons++;
+          break;
+        case "'"  :
+          apostrophes++;
+          break;
+      }
+    }
+  });
+
+  // PRINT RESULTS TO THE CONSOLE
+  console.log("_______________________\n");
+  console.log("YOUR PUNCTUATION COUNTS\r");
+  console.log("_______________________\r");
+  console.log("\n");
+  console.log("PERIODS: " + periods);
+  console.log("COMMAS: " + commas);
+  console.log("QUESTIONS: " + questions);
+  console.log("EXCLAMATIONS: " + exclamations);
+  console.log("DASHES: " + dashes);
+  console.log("COLONS: " + colons);
+  console.log("SEMICOLONS: " + semicolons);
+  console.log("APOSTROPHES: " + apostrophes);
+
+  // // WRITE TO THE DOM
+  // document.getElementById("#commas").innerHTML(commas);
+  // document.getElementById("#periods").innerHTML(periods);
+  // document.getElementById("#questions").innerHTML(questions);
+  // document.getElementById("#exclamations").innerHTML(exclamations);
+  // document.getElementById("#dashes").innerHTML(dashes);
+  // document.getElementById("#colons").innerHTML(colons);
+  // document.getElementById("#semicolons").innerHTML(semicolons);
+  // document.getElementById("#apostrophes").innerHTML(apostrophes);
+});
