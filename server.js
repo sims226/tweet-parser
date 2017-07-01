@@ -1,9 +1,16 @@
-// REQUIRED NODE MODULES
+// MODULE DEPENDENCIES
 var dotenv = require('dotenv');
 var Twitter = require('twitter');
+var express = require('express')
+var app = express()
 
 // LOAD ENV VARIABLES
 dotenv.load();
+
+// START A SERVER
+app.listen(3000, function () {
+  console.log('Listening on port 3000');
+})
 
 // MAKE A TWITTER CLIENT
 var client = new Twitter({
@@ -12,14 +19,6 @@ var client = new Twitter({
   access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
   access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
 });
-
-// CALL STACK
-
-// GRAB USER INPUT AND STORE IT
-function storeInput() {
-  var screenName = getElementById("userInput").value;
-  console.log(screenName);
-}
 
 // GRAB LAST 100 TWEETS
 client.get('statuses/user_timeline', {screen_name: 'sims226', count: 100, trim_user: true}, function(error, tweets, response) {
@@ -73,27 +72,29 @@ client.get('statuses/user_timeline', {screen_name: 'sims226', count: 100, trim_u
     }
   });
 
-  // PRINT RESULTS TO THE CONSOLE
-  console.log("_______________________\n");
-  console.log("YOUR PUNCTUATION COUNTS\r");
-  console.log("_______________________\r");
-  console.log("\n");
-  console.log("PERIODS: " + periods);
-  console.log("COMMAS: " + commas);
-  console.log("QUESTIONS: " + questions);
-  console.log("EXCLAMATIONS: " + exclamations);
-  console.log("DASHES: " + dashes);
-  console.log("COLONS: " + colons);
-  console.log("SEMICOLONS: " + semicolons);
-  console.log("APOSTROPHES: " + apostrophes);
+  // SEND RESULTS TO THE FRONT END
+  app.get('/', function(req, res) {
+    res.send(
+      "HERE ARE YOUR PUNCTUATION COUNTS, MOTHERFUCKER >> " +
+      "PERIODS: " + periods + " >> " +
+      "COMMAS: " + commas + " >> " +
+      "QUESTIONS: " + questions + " >> " +
+      "EXCLAMATIONS: " + exclamations + " >> " +
+      "DASHES: " + dashes + " >> " +
+      "COLONS: " + colons + " >> " +
+      "SEMICOLONS: " + semicolons + " >> " +
+      "APOSTROPHES: " + apostrophes);
+  });
 
-  // WRITE TO THE DOM
-  document.getElementById("#commas").innerHTML(commas);
-  document.getElementById("#periods").innerHTML(periods);
-  document.getElementById("#questions").innerHTML(questions);
-  document.getElementById("#exclamations").innerHTML(exclamations);
-  document.getElementById("#dashes").innerHTML(dashes);
-  document.getElementById("#colons").innerHTML(colons);
-  document.getElementById("#semicolons").innerHTML(semicolons);
-  document.getElementById("#apostrophes").innerHTML(apostrophes);
+  // router.get('/', function(req, res) {
+  //   res.render('index', {
+  //     periods: periods,
+  //     commas: commas,
+  //     questions: questions,
+  //     exclamations: exclamations,
+  //     dashes: dashes,
+  //     colons: colons,
+  //     semicolons: semicolons,
+  //     apostrophes: apostrophes
+  //    })
 });
