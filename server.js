@@ -1,8 +1,8 @@
 // MODULE DEPENDENCIES
 var dotenv = require('dotenv');
 var Twitter = require('twitter');
-var express = require('express')
-var app = express()
+var express = require('express');
+var app = express();
 
 // LOAD ENV VARIABLES
 dotenv.load();
@@ -10,7 +10,7 @@ dotenv.load();
 // START A SERVER
 app.listen(3000, function () {
   console.log('Listening on port 3000');
-})
+});
 
 // MAKE A TWITTER CLIENT
 var client = new Twitter({
