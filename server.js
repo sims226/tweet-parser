@@ -5,8 +5,6 @@ var Twitter = require('twitter');
 // LOAD ENV VARIABLES
 dotenv.load();
 
-// START A SERVER
-
 // MAKE A TWITTER CLIENT
 var client = new Twitter({
   consumer_key: process.env.TWITTER_CONSUMER_KEY,
@@ -67,16 +65,26 @@ client.get('statuses/user_timeline', {screen_name: 'sims226', count: 100, trim_u
     }
   });
 
+  // START A SERVER
+  var http = require("http");
+
+  http.createServer(function (request, response) {
+     response.writeHead(200, {'Content-Type': 'text/plain'});
+     response.end(
+       "HERE ARE YOUR PUNCTUATION COUNTS, MOTHERFUCKER >> " +
+       "PERIODS: " + periods + " >> " +
+       "COMMAS: " + commas + " >> " +
+       "QUESTIONS: " + questions + " >> " +
+       "EXCLAMATIONS: " + exclamations + " >> " +
+       "DASHES: " + dashes + " >> " +
+       "COLONS: " + colons + " >> " +
+       "SEMICOLONS: " + semicolons + " >> " +
+       "APOSTROPHES: " + apostrophes
+);
+  }).listen(3000);
+  console.log('Server running at http://127.0.0.1:3000/');
+
   // SEND RESULTS TO THE FRONT END
-      // "HERE ARE YOUR PUNCTUATION COUNTS, MOTHERFUCKER >> " +
-      // "PERIODS: " + periods + " >> " +
-      // "COMMAS: " + commas + " >> " +
-      // "QUESTIONS: " + questions + " >> " +
-      // "EXCLAMATIONS: " + exclamations + " >> " +
-      // "DASHES: " + dashes + " >> " +
-      // "COLONS: " + colons + " >> " +
-      // "SEMICOLONS: " + semicolons + " >> " +
-      // "APOSTROPHES: " + apostrophes
 
   // router.get('/', function(req, res) {
   //   res.render('index', {
