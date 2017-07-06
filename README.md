@@ -1,5 +1,5 @@
 # **Let Them Parse Tweets**
-A tiny web app that counts (and sorts) punctuation marks from your last 100 tweets.
+A tiny web app that counts punctuation marks from your last 100 tweets.
 
 ## **Built With**
 <!-- + ![HTML5](https://en.wikipedia.org/wiki/Node.js#/media/File:Node.js_logo.svg) -->
