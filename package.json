@@ -25,9 +25,11 @@
   },
   "homepage": "https://github.com/sims226/tweet-parser#readme",
   "dependencies": {
+    "body-parser": "^1.17.2",
     "dotenv": "^4.0.0",
     "ejs": "2.5.6",
     "express": "^4.15.2",
+    "express-validator": "^3.2.0",
     "twitter": "^1.7.1"
   }
 }

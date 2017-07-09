@@ -1,4 +1,6 @@
 // DEPENDENCIES
+var bodyParser = require('body-parser');
+var expressValidator = require('express-validator');
 var dotenv = require('dotenv');
 var Twitter = require('twitter');
 var express = require('express');
@@ -20,6 +22,11 @@ app.use(express.static(__dirname + '/public'));
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
+
+// MIDDLEWARE
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(expressValidator());
 
 app.listen(app.get('port'), function() {
   console.log('Parse du Tweets running on ', app.get('port'));
