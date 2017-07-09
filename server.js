@@ -21,7 +21,7 @@ app.set('port', (process.env.PORT || 3000));
 app.use(express.static(__dirname + '/public'));
 
 app.set('views', __dirname + '/views');
-app.set('view engine', 'ejs');
+app.set('view engine', 'pug');
 
 // MIDDLEWARE
 app.use(bodyParser.json());
@@ -42,6 +42,14 @@ app.get('/', function(req, res) {
         colons: colons,
         semicolons: semicolons,
         apostrophes: apostrophes
+  });
+});
+
+app.get('/farts', function (req, res) {
+  res.render('farts', {
+    title: 'Title Farts',
+    message: 'Hello Farts.',
+    paragraph: 'Paragraph Farts.'
   });
 });
 
