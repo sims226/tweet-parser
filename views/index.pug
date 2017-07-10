@@ -1,16 +1,10 @@
-
 html
 	head
 		title Parse du Tweets
 	body
-		div
-			h1 Parse du Tweets
-			hr
-			p periods #{periods}
-			p commas #{commas}
-			p questions #{questions}
-			p exclamations #{exclamations}
-			p dashes #{dashes}
-			p colons #{colons}
-			p semicolons #{semicolons}
-			p apostrophes #{apostrophes}
+		form(action="/", method="POST")
+			div
+				label(for="userInput") Enter your Twitter name here:
+				input(name="userInput")
+			br
+			button(type="submit") Submit
