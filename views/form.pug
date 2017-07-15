@@ -1,10 +1,4 @@
-html
-	head
-		title Form Tester
-	body
-		form(action="/", method="POST")
-			div
-				label(for="screen_name") Enter your Twitter name here:
-				input(name="screen_name")
-			br
-			button(type="submit") Submit
+form(action="/", method="POST")
+	div
+		input(name="userInput")
+		button.btn-flat.white.blue-text.text-darken-3(type="submit") Submit
