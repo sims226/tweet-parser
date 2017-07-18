@@ -21,18 +21,15 @@ app.listen(app.get('port'), function() {
   console.log('Parse du Tweets running on ', app.get('port'));
 });
 
-// LOAD ENV VARIABLES
+// ENV VARIABLES
 dotenv.load();
 
+// INDEX ROUTE
 app.get('/', function(req, res) {
   res.render('index');
 });
-//
-// app.get('/form', function (req, res) {
-//   res.render('form', {
-//
-//   });
-// });
+
+// ACCEPT USER INPUT AND START THE BIZNISS
 app.post('/', function(req, res){
   var userInput     = req.body.userInput;
   var commas        = 0;
@@ -40,13 +37,12 @@ app.post('/', function(req, res){
   var questions     = 0;
   var exclamations  = 0;
   var dashes        = 0;
-  var colons        = 0;
   var semicolons    = 0;
   var apostrophes   = 0;
 
   console.log(userInput + " is your Twitter screen name.");
 
-  // CREATE A NEW TWITTER CLIENT
+  // BEGIN THE TWITTER PART
   var client = new Twitter({
     consumer_key: process.env.TWITTER_CONSUMER_KEY,
     consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
@@ -64,7 +60,7 @@ app.post('/', function(req, res){
       tweetsArray.push(tweets[i].text);
     }
 
-    // COUNT ALL THE PUNCTUATION IN THE TWEETS AND COUNT THE RESULTS
+    // COUNT ALL THE PUNCTUATION IN THE TWEETS AND STORE THE RESULTS
     tweetsArray.map( function(text) {
       for (var i = 0; i < text.length; i++) {
         switch (text[i]) {
@@ -83,9 +79,6 @@ app.post('/', function(req, res){
           case "-"  :
             dashes++;
             break;
-          case ":"  :
-            colons++;
-            break;
           case ";"  :
             semicolons++;
             break;
@@ -95,6 +88,7 @@ app.post('/', function(req, res){
         }
       }
     });
+    // PASS PUNCTUATION COUNTS TO THE FRONT AND RENDER
     res.render('results', {
           userInput: userInput,
           periods: periods,
@@ -102,11 +96,8 @@ app.post('/', function(req, res){
           questions: questions,
           exclamations: exclamations,
           dashes: dashes,
-          colons: colons,
           semicolons: semicolons,
           apostrophes: apostrophes
     });
   });
 });
-
-// MAKE A TWITTER CLIENT

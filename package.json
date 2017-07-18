@@ -4,7 +4,7 @@
   "description": "A practice app that parses a blob of tweets",
   "main": "server.js",
   "engines": {
-    "node": "5.6.0"
+    "node": "8.1.4"
   },
   "scripts": {
     "start": "node server.js"
@@ -30,6 +30,7 @@
     "ejs": "2.5.6",
     "express": "^4.15.2",
     "express-validator": "^3.2.0",
+    "nodemon": "^1.11.0",
     "pug": "^2.0.0-rc.2",
     "twitter": "^1.7.1"
   }

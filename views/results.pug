@@ -1,16 +1,19 @@
-
-html
-	head
-		title Parse du Tweets
-	body
-		div
-			h1 Parse du Tweets for #{userInput}
-			hr
-			p periods #{periods}
-			p commas #{commas}
-			p questions #{questions}
-			p exclamations #{exclamations}
-			p dashes #{dashes}
-			p colons #{colons}
-			p semicolons #{semicolons}
-			p apostrophes #{apostrophes}
+extends base
+block content
+	.container
+		.row
+			.col.s6.offset-s3
+				h1 @#{userInput}
+				.divider
+				p.flow-text periods: #{periods}
+				p.flow-text commas: #{commas}
+				p.flow-text questions: #{questions}
+				p.flow-text exclamations: #{exclamations}
+				p.flow-text dashes: #{dashes}
+				p.flow-text semicolons: #{semicolons}
+				p.flow-text apostrophes: #{apostrophes}
+				.divider
+				br
+				form(action="/", method="GET")
+					div
+						button.btn-flat.white.blue-text.text-darken-3(type="submit") Do It Again

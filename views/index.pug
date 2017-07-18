@@ -1,10 +1,13 @@
-html
-	head
-		title Parse du Tweets
-	body
-		form(action="/", method="POST")
-			div
-				label(for="userInput") Enter your Twitter name here:
-				input(name="userInput")
-			br
-			button(type="submit") Submit
+extends base
+
+block content
+	.container
+		.row
+			.col.s6.offset-s3
+
+				h1 Parse du Tweets
+
+				p.flow-text Ever wondered how many and what kind of punctuation marks you used in your last 100 tweets? Of course you have. Enter your (or anyone's) Twitter username (no @) below and watch the magic happen.
+				p.flow-text It's fun. Trust me.
+
+				include form
