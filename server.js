@@ -29,7 +29,7 @@ app.get('/', function(req, res) {
   res.render('index');
 });
 
-// ACCEPT USER INPUT
+// ACCEPT USER INPUT AND START THE BIZNISS
 app.post('/', function(req, res){
   var userInput     = req.body.userInput;
   var commas        = 0;
