@@ -1,0 +1,13 @@
+extends base
+block content
+	.container
+		.row
+			.col.s6.offset-s3
+				h1 Uh-oh. Error Code #{code}.
+				.divider
+				p.flow-text #{message}
+				.divider
+				br
+				form(action="/", method="GET")
+					div
+						button.btn-flat.white.blue-text.text-darken-3(type="submit") Try Again

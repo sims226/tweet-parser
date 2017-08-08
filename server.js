@@ -15,7 +15,7 @@ app.set('view engine', 'pug');
 // MIDDLEWARE
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(expressValidator());
+app.use(expressValidator()); // TODO:consider eliminating
 
 app.listen(app.get('port'), function() {
   console.log('Parse du Tweets running on ', app.get('port'));
@@ -52,9 +52,16 @@ app.post('/', function(req, res){
 
   // GRAB LAST 100 TWEETS
   client.get('statuses/user_timeline', {screen_name: userInput, count: 100, trim_user: true}, function(error, tweets, response) {
-    if(error) throw error;
+    if(error) throw res.render('error', {
+      code: error[0].code,
+      message: error[0].message
+    });
+      // TODO redirect to error page
 
     // LOOP OVER RESPONSE OBJECT AND PUSH TWEET TEXT INTO NEW ARRAY
+
+    // TODO: consolidate using for...in per Jesse ex
+
     var tweetsArray = [];
     for(var i = 0; i < tweets.length; i++) {
       tweetsArray.push(tweets[i].text);
@@ -99,5 +106,6 @@ app.post('/', function(req, res){
           semicolons: semicolons,
           apostrophes: apostrophes
     });
+    // consider redirect to /results endpoint
   });
 });
